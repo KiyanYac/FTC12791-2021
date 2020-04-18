@@ -1,0 +1,187 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+
+@Autonomous(name="FoundRedStoneNew", group="Pushbot")
+
+public class FoundRedStoneNew extends LinearOpMode {
+
+    /* Declare OpMode members. */
+      
+
+    static final double     FORWARD_SPEED = 0.4;  
+    
+    private DcMotor leftFront = null;
+    private DcMotor rightFront = null;
+    private DcMotor leftBack = null;
+    private DcMotor rightBack = null;
+    private Servo leftServo = null;
+    private Servo rightServo = null;
+    private Servo linearServol = null;
+    private Servo linearServor = null;
+   private DcMotor linearmotor = null;
+    //Use a Pushbot's hardware
+    private ElapsedTime     runtime = new ElapsedTime();
+
+   
+
+    @Override
+    public void runOpMode() {
+
+                
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+        leftServo = hardwareMap.get(Servo.class, "leftServo");
+        rightServo = hardwareMap.get(Servo.class, "rightServo");
+        linearServol = hardwareMap.get(Servo.class, "linearServol");
+        linearServor = hardwareMap.get(Servo.class, "linearServor");
+         linearmotor = hardwareMap.get(DcMotor.class, "linearmotor");
+       
+        telemetry.addData("Status", "Ready to run");    //
+        telemetry.update();
+
+        // Wait for the game to start (driver presses PLAY)
+        waitForStart();
+      
+
+        /*while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+        */
+          leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        //this is drive forward
+      sleep(650);
+
+        leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(-FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        sleep(650);
+        //strafe right
+        leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        //drive forward again
+      sleep(0);
+        
+        leftServo.setPosition(0.2);
+        rightServo.setPosition(-0.65);
+        sleep(1400);
+        //drop servos
+        leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(-FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(-FORWARD_SPEED);
+        //reverse with foundation
+      sleep(3650);
+      
+        leftServo.setPosition(-0.96);
+        rightServo.setPosition(0.65);
+        sleep(1550);
+        //pick up servos
+         leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        //this is drive forward just a little 
+      sleep(150);
+        
+         leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(-FORWARD_SPEED);
+      sleep(1650);
+      //strafe to bridge
+        
+        
+         leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        //this is drive forward to high under bridge
+      sleep(600);
+        
+        leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(-FORWARD_SPEED);
+      sleep(2310);
+      //strafe to blocks
+      
+       leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+        //this is drive forward to block
+      sleep(650);
+     
+      leftServo.setPosition(0.17);
+    rightServo.setPosition(-.78);
+    sleep(350);
+//drop servos on block
+ 
+     leftFront.setPower(0);
+        rightFront.setPower(0);
+        leftBack.setPower(0);
+        rightBack.setPower(0);
+        //this is drive forward
+      sleep(350);
+      //forward with the block
+     
+        leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(-FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(-FORWARD_SPEED);
+        //reverse with block
+      sleep(1200);
+      
+        leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+      sleep(600);
+        //point rotation
+
+        leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(-FORWARD_SPEED);
+        leftBack.setPower(FORWARD_SPEED);
+        rightBack.setPower(-FORWARD_SPEED);
+      sleep(2400);
+        //reverse with stone
+
+
+        leftServo.setPosition(-0.96);
+        rightServo.setPosition(0.65);
+        sleep(2900);
+        //deliver stone
+        
+      leftFront.setPower(FORWARD_SPEED);
+        rightFront.setPower(-FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+      sleep(600);
+//strafe right to avoid hitting the stone
+        
+       leftFront.setPower(-FORWARD_SPEED);
+        rightFront.setPower(FORWARD_SPEED);
+        leftBack.setPower(-FORWARD_SPEED);
+        rightBack.setPower(FORWARD_SPEED);
+      sleep(1700);
+     //drive forward to park
+    }
+}
+
+
