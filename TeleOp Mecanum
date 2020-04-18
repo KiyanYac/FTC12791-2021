@@ -1,0 +1,341 @@
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+@TeleOp(name = "Gen", group = "Linear Opmode")
+public class Gen extends LinearOpMode {
+	private DcMotor leftFront = null;
+	private DcMotor rightFront = null;
+	private DcMotor leftBack = null;
+	private DcMotor rightBack = null;
+	private DcMotor leftintake = null;
+	private DcMotor rightintake = null;
+	private DcMotor autonintake = null;
+	private Servo leftServo = null;
+	private Servo rightServo = null;
+	private Servo backServo = null;
+	@Override
+	public void runOpMode() {
+    	telemetry.addData("Status", "Initialized");
+    	telemetry.update();
+    	leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+    	rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+    	leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+    	rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+    	leftintake = hardwareMap.get(DcMotor.class, "leftintake");
+    	rightintake = hardwareMap.get(DcMotor.class, "rightintake");
+    	autonintake = hardwareMap.get(DcMotor.class, "autonintake");
+    	leftServo = hardwareMap.get(Servo.class, "leftServo");
+    	rightServo = hardwareMap.get(Servo.class, "rightServo");
+    	backServo = hardwareMap.get(Servo.class, "backServo");
+    	
+    	leftFront.setDirection(DcMotor.Direction.FORWARD);
+    	rightFront.setDirection(DcMotor.Direction.REVERSE);
+    	leftBack.setDirection(DcMotor.Direction.FORWARD);
+    	rightBack.setDirection(DcMotor.Direction.REVERSE);
+    	waitForStart();
+    	while (opModeIsActive()) {
+        	double leftStickY = -gamepad1.left_stick_y;
+        	double leftStickX = gamepad1.left_stick_x;
+        	double rightStickX = gamepad1.right_stick_x;
+        	mecDrive(leftStickY,rightStickX,leftStickX);
+ if (gamepad1.x) {
+	leftintake.setPower(0.7);
+	rightintake.setPower(-0.7);
+	telemetry.addData("Gamepad1", "X Pressed");
+	}
+if (gamepad1.x) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "X Pressed");
+}
+ if (gamepad1.b) {
+	leftintake.setPower(-0.7);
+	rightintake.setPower(0.7);
+	telemetry.addData("Gamepad1", "B Pressed");
+	}
+if (gamepad1.b) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "B Pressed");
+}
+if(gamepad1.dpad_up)
+{
+	leftServo.setPosition(0.5);
+	rightServo.setPosition(0.9);
+}
+if(gamepad1.dpad_down)
+{
+	leftServo.setPosition(0.9);
+	rightServo.setPosition(0.49);
+	
+}
+if(gamepad1.y){
+	autonintake.setPower(0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "Y Pressed");
+}
+	
+if(gamepad1.a){
+	autonintake.setPower(-0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "A Pressed");
+	
+}
+if(gamepad1.dpad_right){
+	backServo.setPosition(0.95);
+	
+	backServo.setDirection(Servo.Direction.REVERSE);
+	
+	
+	
+}
+if(gamepad1.dpad_left){
+	backServo.setPosition(0.4);
+	
+	
+}
+}
+}
+	public void mecDrive(double forward, double turn, double strafe){
+ 	leftFront.setPower(forward + turn + strafe);
+ 	rightFront.setPower(forward - turn - strafe);
+ 	leftBack.setPower(forward + turn - strafe);
+ 	rightBack.setPower(forward - turn + strafe);
+	
+	
+	}
+}
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+@TeleOp(name = "Gen", group = "Linear Opmode")
+public class Gen extends LinearOpMode {
+	private DcMotor leftFront = null;
+	private DcMotor rightFront = null;
+	private DcMotor leftBack = null;
+	private DcMotor rightBack = null;
+	private DcMotor leftintake = null;
+	private DcMotor rightintake = null;
+	private DcMotor autonintake = null;
+	private Servo leftServo = null;
+	private Servo rightServo = null;
+	private Servo backServo = null;
+	@Override
+	public void runOpMode() {
+    	telemetry.addData("Status", "Initialized");
+    	telemetry.update();
+    	leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+    	rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+    	leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+    	rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+    	leftintake = hardwareMap.get(DcMotor.class, "leftintake");
+    	rightintake = hardwareMap.get(DcMotor.class, "rightintake");
+    	autonintake = hardwareMap.get(DcMotor.class, "autonintake");
+    	leftServo = hardwareMap.get(Servo.class, "leftServo");
+    	rightServo = hardwareMap.get(Servo.class, "rightServo");
+    	backServo = hardwareMap.get(Servo.class, "backServo");
+    	
+    	leftFront.setDirection(DcMotor.Direction.FORWARD);
+    	rightFront.setDirection(DcMotor.Direction.REVERSE);
+    	leftBack.setDirection(DcMotor.Direction.FORWARD);
+    	rightBack.setDirection(DcMotor.Direction.REVERSE);
+    	waitForStart();
+    	while (opModeIsActive()) {
+        	double leftStickY = -gamepad1.left_stick_y;
+        	double leftStickX = gamepad1.left_stick_x;
+        	double rightStickX = gamepad1.right_stick_x;
+        	mecDrive(leftStickY,rightStickX,leftStickX);
+ if (gamepad1.x) {
+	leftintake.setPower(0.7);
+	rightintake.setPower(-0.7);
+	telemetry.addData("Gamepad1", "X Pressed");
+	}
+if (gamepad1.x) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "X Pressed");
+}
+ if (gamepad1.b) {
+	leftintake.setPower(-0.7);
+	rightintake.setPower(0.7);
+	telemetry.addData("Gamepad1", "B Pressed");
+	}
+if (gamepad1.b) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "B Pressed");
+}
+if(gamepad1.dpad_up)
+{
+	leftServo.setPosition(0.5);
+	rightServo.setPosition(0.9);
+}
+if(gamepad1.dpad_down)
+{
+	leftServo.setPosition(0.9);
+	rightServo.setPosition(0.49);
+	
+}
+if(gamepad1.y){
+	autonintake.setPower(0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "Y Pressed");
+}
+	
+if(gamepad1.a){
+	autonintake.setPower(-0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "A Pressed");
+	
+}
+if(gamepad1.dpad_right){
+	backServo.setPosition(0.95);
+	
+	backServo.setDirection(Servo.Direction.REVERSE);
+	
+	
+	
+}
+if(gamepad1.dpad_left){
+	backServo.setPosition(0.4);
+	
+	
+}
+}
+}
+	public void mecDrive(double forward, double turn, double strafe){
+ 	leftFront.setPower(forward + turn + strafe);
+ 	rightFront.setPower(forward - turn - strafe);
+ 	leftBack.setPower(forward + turn - strafe);
+ 	rightBack.setPower(forward - turn + strafe);
+	
+	
+	}
+}
+
+
+
+package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
+@TeleOp(name = "Gen", group = "Linear Opmode")
+public class Gen extends LinearOpMode {
+	private DcMotor leftFront = null;
+	private DcMotor rightFront = null;
+	private DcMotor leftBack = null;
+	private DcMotor rightBack = null;
+	private DcMotor leftintake = null;
+	private DcMotor rightintake = null;
+	private DcMotor autonintake = null;
+	private Servo leftServo = null;
+	private Servo rightServo = null;
+	private Servo backServo = null;
+	@Override
+	public void runOpMode() {
+    	telemetry.addData("Status", "Initialized");
+    	telemetry.update();
+    	leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+    	rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+    	leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+    	rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+    	leftintake = hardwareMap.get(DcMotor.class, "leftintake");
+    	rightintake = hardwareMap.get(DcMotor.class, "rightintake");
+    	autonintake = hardwareMap.get(DcMotor.class, "autonintake");
+    	leftServo = hardwareMap.get(Servo.class, "leftServo");
+    	rightServo = hardwareMap.get(Servo.class, "rightServo");
+    	backServo = hardwareMap.get(Servo.class, "backServo");
+    	
+    	leftFront.setDirection(DcMotor.Direction.FORWARD);
+    	rightFront.setDirection(DcMotor.Direction.REVERSE);
+    	leftBack.setDirection(DcMotor.Direction.FORWARD);
+    	rightBack.setDirection(DcMotor.Direction.REVERSE);
+    	waitForStart();
+    	while (opModeIsActive()) {
+        	double leftStickY = -gamepad1.left_stick_y;
+        	double leftStickX = gamepad1.left_stick_x;
+        	double rightStickX = gamepad1.right_stick_x;
+        	mecDrive(leftStickY,rightStickX,leftStickX);
+ if (gamepad1.x) {
+	leftintake.setPower(0.7);
+	rightintake.setPower(-0.7);
+	telemetry.addData("Gamepad1", "X Pressed");
+	}
+if (gamepad1.x) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "X Pressed");
+}
+ if (gamepad1.b) {
+	leftintake.setPower(-0.7);
+	rightintake.setPower(0.7);
+	telemetry.addData("Gamepad1", "B Pressed");
+	}
+if (gamepad1.b) {
+	leftintake.setPower(0);
+ 	rightintake.setPower(0);
+ 	telemetry.addData("Gamepad1", "B Pressed");
+}
+if(gamepad1.dpad_up)
+{
+	leftServo.setPosition(0.5);
+	rightServo.setPosition(0.9);
+}
+if(gamepad1.dpad_down)
+{
+	leftServo.setPosition(0.9);
+	rightServo.setPosition(0.49);
+	
+}
+if(gamepad1.y){
+	autonintake.setPower(0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "Y Pressed");
+}
+	
+if(gamepad1.a){
+	autonintake.setPower(-0.7);
+	autonintake.setPower(0);
+	telemetry.addData("Gamepad1", "A Pressed");
+	
+}
+if(gamepad1.dpad_right){
+	backServo.setPosition(0.95);
+	
+	backServo.setDirection(Servo.Direction.REVERSE);
+	
+	
+	
+}
+if(gamepad1.dpad_left){
+	backServo.setPosition(0.4);
+	
+	
+}
+}
+}
+	public void mecDrive(double forward, double turn, double strafe){
+ 	leftFront.setPower(forward + turn + strafe);
+ 	rightFront.setPower(forward - turn - strafe);
+ 	leftBack.setPower(forward + turn - strafe);
+ 	rightBack.setPower(forward - turn + strafe);
+	
+	
+	}
+}
+
+
